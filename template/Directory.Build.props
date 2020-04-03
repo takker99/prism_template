@@ -1,0 +1,12 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <NullableReferenceTypes>True</NullableReferenceTypes>
+    <Deterministic>true</Deterministic>
+    <!--<PublishSingleFile>true</PublishSingleFile>-->
+    <PublishTrimmed>true</PublishTrimmed>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <BaseOutputPath>e:/dotnet_build_dir/$(AssemblyName)/bin/</BaseOutputPath>
+    <BaseIntermediateOutputPath>e:/dotnet_build_dir/$(AssemblyName)/obj/</BaseIntermediateOutputPath>
+  </PropertyGroup>
+</Project>
