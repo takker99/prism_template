@@ -84,7 +84,7 @@ print(f"Add the module \"{args.module_name}\"")
 module_path = os.path.dirname(solution_file_path)+"/"+args.module_name
 os.makedirs(module_path, exist_ok=True)
 os.chdir(module_path)
-if has_view_viewmodel:
+if args.view_name:
     os.makedirs("Views", exist_ok=True)
     os.makedirs("ViewModels", exist_ok=True)
 
