@@ -5,27 +5,38 @@ import glob
 import subprocess
 import pathlib
 import sys
+import argparse
 
 # format:
-#  add-module.py {solution_dir} {module_name} with-view-viewmodel [view_name]
-# .sln ファイルがないdirectoryで実行すると失敗するようにする
+#  add-module.py {solution_dir} {module_name} --view-name [view_name]
+parser = argparse.ArgumentParser()
+parser.add_argument(
+    "solution_file", help="the solution file which you want to add a new module to")
+parser.add_argument("module_name", help="the name of a module you want to add")
+parser.add_argument("-v", "--view_name", help="set the view name if you want")
+args = parser.parse_args()
 
-if sys.argv[3] != "with-view-viewmodel" and sys.argv[3] != "":
-    raise ValueError("Invalid argument")
-
-module_name = sys.argv[2]
-solution_file_path = pathlib.Path(sys.argv[1]).resolve()
-has_view_viewmodel = sys.argv[3] == "with-view-viewmodel"
-view_name = sys.argv[4] if has_view_viewmodel else ""
+solution_file_path = pathlib.Path(args.solution_file).resolve()
 template_directory = "template"
-template_files = {"proj": "template/Project.csproj", "module": "template/Module.cs",
-                  "view_xaml": "template/VVM/View.xaml", "view_cs": "template/VVM/View.xaml.cs", "view_model": "template/VVM/ViewModel.cs"}
+template_files = {"proj": "template/Project.csproj", "module": "template/Module.cs",}
+target_files = {"proj": f"{args.module_name}.csproj",
+                "module": f"{args.module_name}.cs", }
+
+# view/viewmodel の作成が指定されている場合
+if args.view_name:
+    template_files["view_xaml"] = f"template/VVM/View.xaml"
+    template_files["view_cs"] = f"template/VVM/View.xaml.cs"
+    template_files["view_model"] = f"template/VVM/ViewModel.cs"
+    target_files["view_xaml"] = f"Views/{args.view_name}.xaml"
+    target_files["view_cs"] = f"Views/{args.view_name}.xaml.cs"
+    target_files["view_model"] = f"ViewModels/{args.view_name}.cs"
+
+
+# current directory の変更の影響を受けないように、相対パスを絶対パスに変換している。
 template_files = {k: pathlib.Path(v).resolve()
                   for k, v in template_files.items()}
-target_files = {"proj": f"{module_name}.csproj", "module": f"{module_name}.cs",
-                "view_xaml": f"Views/{view_name}.xaml", "view_cs": f"Views/{view_name}.xaml.cs", "view_model": f"ViewModels/{view_name}.cs"}
 target_files = {k: pathlib.Path(os.path.dirname(
-    solution_file_path)+f"/{module_name}/"+v).resolve() for k, v in target_files.items()}
+    solution_file_path)+f"/{args.module_name}/"+v).resolve() for k, v in target_files.items()}
 
 # template file から file を生成する。
 
@@ -67,10 +78,10 @@ for key in template_files:
 # print("done")
 # print(f"The solution file: {list_sln[0]}")
 
-print(f"Add the module \"{module_name}\"")
+print(f"Add the module \"{args.module_name}\"")
 
 # directory を掘る
-module_path = os.path.dirname(solution_file_path)+"/"+module_name
+module_path = os.path.dirname(solution_file_path)+"/"+args.module_name
 os.makedirs(module_path, exist_ok=True)
 os.chdir(module_path)
 if has_view_viewmodel:
@@ -80,8 +91,8 @@ if has_view_viewmodel:
 # module files のデータを用意する
 for key in template_files:
     create_file_from_template(target_files[key], template_files[key],
-                              lambda file_text: file_text.replace("NAMESPACE", module_name).replace(
-                                  "CLASS", view_name).replace("TOPTAG", "UserControl"))
+                              lambda file_text: file_text.replace("NAMESPACE", args.module_name).replace(
+                                  "CLASS", args.view_name).replace("TOPTAG", "UserControl"))
 
 
 print("Created these files:")
@@ -97,11 +108,11 @@ print("Success.")
 
 print("Successfully finished!")
 
-#   {module_name}/
-#   ├{module_name}.csproj
-#   ├{module_name}.cs
+#   {args.module_name}/
+#   ├{args.module_name}.csproj
+#   ├{args.module_name}.cs
 #   ├Views/
-#   │├{view_name}.xaml
-#   │└{view_name}.xaml.cs
+#   │├{args.view_name}.xaml
+#   │└{args.view_name}.xaml.cs
 #   └ViewModels/
-#     └{view_name}.cs
+#     └{args.view_name}.cs
