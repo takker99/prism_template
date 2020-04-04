@@ -5,7 +5,6 @@ verify_ssl = true
 
 [dev-packages]
 pylint = "*"
-flake8 = "*"
 autopep8 = "*"
 
 [packages]
