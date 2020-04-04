@@ -102,9 +102,9 @@ for key in target_files:
 # dotnet の設定を行う
 subprocess.check_call(["dotnet.exe", "add", "package", "Prism.Unity"])
 print("add {0} to {1}...".format(target_files["proj"], solution_file_path))
-subprocess.check_call(
-    ["dotnet.exe", "sln", solution_file_path, "add", "project", target_files["proj"]])
-print("Success.")
+# subprocess.check_call(
+#     ["dotnet.exe", "sln", solution_file_path, "add", "project", target_files["proj"]])
+# print("Success.")
 
 print("Successfully finished!")
 
