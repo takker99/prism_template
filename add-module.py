@@ -92,7 +92,7 @@ if args.view_name:
 for key in template_files:
     create_file_from_template(target_files[key], template_files[key],
                               lambda file_text: file_text.replace("NAMESPACE", args.module_name).replace(
-                                  "CLASS", args.view_name).replace("TOPTAG", "UserControl"))
+                                  "CLASS", args.view_name if args.view_name else "CLASS" ).replace("TOPTAG", "UserControl"))
 
 
 print("Created these files:")
