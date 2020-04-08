@@ -1,0 +1,4 @@
+# prism_template
+
+Prismを使用したWPF application projectを作成するscript集です。自分用にdirectory構成やclassの命名規則を変えてあります。
+バグ取りはまだ全然やっていないです。
