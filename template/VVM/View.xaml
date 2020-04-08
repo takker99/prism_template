@@ -1,4 +1,4 @@
-<TOPTAG x:Class=MODULE_NAMESPACE.Views.VIEW"
+<TOPTAG x:Class="MODULE_NAMESPACE.Views.VIEW"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:MODULE_NAMESPACE.Views"
