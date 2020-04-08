@@ -1,16 +1,14 @@
 using Prism.Mvvm;
+using Reactive.Bindings;
+using Reactive.Bindings.Extensions;
 
-namespace NAMESPACE.ViewModels
+namespace MODULE_NAMESPACE.ViewModels
 {
-    public class CLASS : BindableBase
+    public class VIEW : BindableBase, System.IDisposable
     {
-        private string _title = "Prism Application";
-        public string Title
-        {
-            get => this._title;
-            set => SetProperty(ref this._title, value);
-        }
+        public VIEW() { }
 
-        public CLASS() { }
+        void System.IDisposable.Dispose() => this._disposables.Dispose();
+        private System.Reactive.Disposables.CompositeDisposable _disposables = new System.Reactive.Disposables.CompositeDisposable();
     }
 }

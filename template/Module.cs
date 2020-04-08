@@ -2,7 +2,7 @@ using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
 
-namespace NAMESPACE
+namespace MODULE_NAMESPACE
 {
     public class Module : IModule
     {

@@ -1,12 +1,12 @@
 using System.Windows;
 
-namespace NAMESPACE.Views
+namespace MODULE_NAMESPACE.Views
 {
     /// <summary>
-    /// Interaction logic for CLASS.xaml
+    /// Interaction logic for VIEW.xaml
     /// </summary>
-    public partial class CLASS : TOPTAG
+    public partial class VIEW : TOPTAG
     {
-        public CLASS() => InitializeComponent();
+        public VIEW() => InitializeComponent();
     }
 }
