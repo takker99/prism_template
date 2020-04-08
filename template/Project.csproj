@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
     <PropertyGroup>
-        <OutputType>WinExe</OutputType>
+        <OutputType>OUTPUT_TYPE</OutputType>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <UseWPF>true</UseWPF>
         <AssemblyName>MODULE_NAMESPACE</AssemblyName>

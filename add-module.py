@@ -89,7 +89,7 @@ def module(args):
 
     # module files のデータを用意する
     def replace_func(file_text): return file_text.replace(
-        "MODULE_NAMESPACE", args.module_name).replace("TOPTAG", "UserControl")
+        "MODULE_NAMESPACE", args.module_name).replace("OUTPUT_TYPE", "Library").replace("TOPTAG", "UserControl")
     for key in target_files:
         create_file_from_template(target_files[key], template_files[key],
                                   replace_func)
