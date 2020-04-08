@@ -3,6 +3,6 @@
         <OutputType>WinExe</OutputType>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <UseWPF>true</UseWPF>
-        <AssemblyName>NAMESPACE</AssemblyName>
+        <AssemblyName>MODULE_NAMESPACE</AssemblyName>
     </PropertyGroup>
 </Project>
